@@ -12,7 +12,24 @@ class PostSeeder extends Seeder
      * @return void
      */
     public function run(Faker $faker)
-    {
+    {   
+        $title = 'Proviamo se funziona lo slug';
+        Post::create([
+            'title'     => $title,
+            'content'   => $faker->text(rand(200, 1000)),
+            'slug'      => Post::titleToSlug($title)
+        ]);
+        Post::create([
+            'title'     => $title,
+            'content'   => $faker->text(rand(200, 1000)),
+            'slug'      => Post::titleToSlug($title)
+        ]);
+        Post::create([
+            'title'     => $title,
+            'content'   => $faker->text(rand(200, 1000)),
+            'slug'      => Post::titleToSlug($title)
+        ]);
+
         for ($i = 0; $i < 100; $i++) {
             $title = $faker->words(rand(2, 10), true);
             Post::create([

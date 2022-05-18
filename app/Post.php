@@ -13,18 +13,15 @@ class Post extends Model
         'slug'
     ];
 
-    static public function titleToSlug($string) {
-        $slug = Str::of($string)->slug('-');
-        $_i = '0';
-        while(self::where('slug', $slug)->first()) {
-            if ($_i === 0) {
-                $_i = '';
-                return $_i;
-            }
-            $slug = "$slug-$_i";
+    static public function titleToSlug($string)
+    {
+        $baseSlug = Str::of($string)->slug('-');
+        $slug = $baseSlug;
+        $_i = '1';
+        while (self::where('slug', $slug)->first()) {
+            $slug = "$baseSlug-$_i";
             $_i++;
         }
         return $slug;
-
     }
 }
