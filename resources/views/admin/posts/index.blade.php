@@ -1,10 +1,14 @@
-@extends('layouts.admin')
+@extends('layouts.app')
 
 @section('title', 'Index')
 
 @section('content')
 
 <div class="container">
+    @if (session('deleted'))
+    <div class="alert alert-warning">{{ session('deleted') }}</div>
+    @endif
+
     <table class="table table-hover">
         <thead>
             <tr>
@@ -17,13 +21,13 @@
             @foreach ($posts as $post)
             <tr>
                 <th scope="row">{{ $post->id }}</th>
-                <th scope="row">{{ $post->title }}</th>
+                <th scope="row"><a href="{{ route('admin.posts.show', $post->slug) }}">{{ $post->title }}</a></th>
                 <td>{{ $post->slug }}</td>
                 <td>
-                    <a class="btn btn-primary" href="{{ route('admin.posts.edit', $post->id) }}">Edit</a>
+                    <a class="btn btn-primary" href="{{ route('admin.posts.edit', $post->slug) }}">Edit</a>
                 </td>
                 <td>
-                    <button class="btn btn-danger delete-button" data-id="{{ $post->id }}">Delete</button>
+                    <button class="btn btn-danger delete-button" data-id="{{ $post->slug }}">Delete</button>
                 </td>
             </tr>
             @endforeach
@@ -43,5 +47,5 @@
         <button id="cancel-button" class="btn btn-outline-secondary">Annulla</button>
     </div>
 </div>
-    
+
 @endsection

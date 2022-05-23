@@ -20,7 +20,7 @@ class Post extends Model
 
     static public function titleToSlug($string)
     {
-        $baseSlug = Str::of($string)->slug('-');
+        $baseSlug = Str::of($string)->slug('-')->__toString();
         $slug = $baseSlug;
         $_i = '1';
         while (self::where('slug', $slug)->first()) {
